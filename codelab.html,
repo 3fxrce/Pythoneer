@@ -1,1 +1,219 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pythoneer - Code Lab</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #080f1e;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background: #101c32;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h2 {
+    color: #38bdf8;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+}
+
+.container {
+    max-width: 950px;
+    margin: auto;
+    padding: 35px 20px;
+}
+
+h1 {
+    color: #38bdf8;
+}
+
+.description {
+    color: #b8c5d8;
+}
+
+.editor {
+    background: #111c30;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 25px;
+    border: 1px solid #263b59;
+}
+
+textarea {
+    width: 100%;
+    height: 230px;
+    background: #080f1e;
+    color: #38bdf8;
+    border: 1px solid #263b59;
+    border-radius: 8px;
+    padding: 15px;
+    font-family: monospace;
+    font-size: 15px;
+    resize: vertical;
+}
+
+button {
+    background: #0284c7;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 7px;
+    cursor: pointer;
+    margin-top: 12px;
+    font-size: 15px;
+}
+
+button:hover {
+    background: #0369a1;
+}
+
+.output {
+    background: #080f1e;
+    border: 1px solid #263b59;
+    border-radius: 8px;
+    padding: 15px;
+    min-height: 100px;
+    margin-top: 15px;
+    white-space: pre-wrap;
+    font-family: monospace;
+    overflow-wrap: anywhere;
+}
+
+.status {
+    color: #38bdf8;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #8da2bc;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>PYTHONEER</h2>
+    <a href="index.html">Home</a>
+</header>
+
+<div class="container">
+
+    <h1>Python Code Lab</h1>
+
+    <p class="description">
+        Write Python code, run it and see what happens!
+    </p>
+
+    <div class="editor">
+
+        <h3>Your Code</h3>
+
+        <textarea id="code" spellcheck="false">print("Hello, World!")
+
+name = "Student"
+
+print("Welcome to Pythoneer, " + name)</textarea>
+
+        <button id="run">▶ Run Code</button>
+
+        <button id="clear">Clear Output</button>
+
+        <h3>Output</h3>
+
+        <div class="output" id="output">Your results will appear here.</div>
+
+        <p class="status" id="status">Python is loading...</p>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Pythoneer | Learn. Practise. Create.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.29.0/full/pyodide.js"></script>
+
+<script>
+let pyodide;
+let running = false;
+
+async function loadPython() {
+    const status = document.getElementById("status");
+
+    try {
+        pyodide = await loadPyodide();
+        status.textContent = "Python is ready! Start coding.";
+    } catch (error) {
+        status.textContent = "Could not load Python. Check your internet connection.";
+    }
+}
+
+document.getElementById("run").addEventListener("click", async function() {
+
+    const code = document.getElementById("code").value;
+    const output = document.getElementById("output");
+    const status = document.getElementById("status");
+
+    if (!pyodide || running) {
+        status.textContent = "Please wait for Python to load.";
+        return;
+    }
+
+    running = true;
+    output.textContent = "";
+    status.textContent = "Running your code...";
+
+    try {
+        pyodide.setStdout({
+            batched: (text) => {
+                output.textContent += text + "\n";
+            }
+        });
+
+        await pyodide.runPythonAsync(code);
+
+        if (!output.textContent) {
+            output.textContent = "Code finished successfully!";
+        }
+
+        status.textContent = "Finished successfully!";
+    } catch (error) {
+        output.textContent = String(error);
+        status.textContent = "There was an error in your code.";
+    } finally {
+        running = false;
+    }
+});
+
+document.getElementById("clear").addEventListener("click", function() {
+    document.getElementById("output").textContent = "";
+});
+
+loadPython();
+</script>
+
+</body>
+</html>
+
