@@ -214,7 +214,9 @@ document.getElementById("run").addEventListener("click", async function() {
 document.getElementById("clear").addEventListener("click", function() {
     document.getElementById("output").textContent = "";
 });
-
+document.getElementById("clearInput").addEventListener("click", function() {
+    document.getElementById("code").value = "";
+});
 loadPython();
 </script>
 
