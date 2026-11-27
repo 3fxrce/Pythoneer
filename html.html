@@ -1,1 +1,147 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pythoneer - HTML Academy</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #101827;
+            color: white;
+            margin: 0;
+        }
+
+        header {
+            background: #17243a;
+            padding: 25px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #38bdf8;
+        }
+
+        main {
+            max-width: 850px;
+            margin: auto;
+            padding: 25px;
+        }
+
+        .lesson {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #38bdf8;
+        }
+
+        pre {
+            background: #0b1120;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        button {
+            background: #38bdf8;
+            color: #101827;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #0ea5e9;
+        }
+
+        #answer {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1> Pythoneer HTML Academy </h1>
+    <p>Learn HTML from beginner to pro!</p>
+</header>
+
+<main>
+
+    <section class="lesson">
+        <h2>Lesson 1: What is HTML?</h2>
+        <p>HTML stands for HyperText Markup Language.</p>
+        <p>It is used to create the structure of websites.</p>
+    </section>
+
+    <section class="lesson">
+        <h2>Lesson 2: HTML Headings</h2>
+        <p>Headings are used for titles.</p>
+        <pre>&lt;h1&gt;Hello World!&lt;/h1&gt;</pre>
+        <p>This creates a large heading.</p>
+    </section>
+
+    <section class="lesson">
+        <h2>Lesson 3: HTML Paragraphs</h2>
+        <p>Use the paragraph tag to write text.</p>
+        <pre>&lt;p&gt;I am learning HTML!&lt;/p&gt;</pre>
+    </section>
+
+    <section class="lesson">
+        <h2>Lesson 4: HTML Images</h2>
+        <p>The img tag displays an image.</p>
+        <pre>&lt;img src="image.jpg" alt="My image"&gt;</pre>
+    </section>
+
+    <section class="lesson">
+        <h2>Lesson 5: HTML Links</h2>
+        <p>Links allow people to visit other pages.</p>
+        <pre>&lt;a href="https://google.com"&gt;Visit Google&lt;/a&gt;</pre>
+    </section>
+
+    <section class="lesson">
+        <h2>Lesson 6: HTML Buttons</h2>
+        <p>Buttons allow users to interact with websites.</p>
+        <pre>&lt;button&gt;Click Me!&lt;/button&gt;</pre>
+    </section>
+
+    <section class="lesson">
+        <h2>Test Your Knowledge!</h2>
+        <p>Which HTML tag creates a paragraph?</p>
+
+        <button onclick="checkAnswer('A')">A. &lt;h1&gt;</button>
+        <button onclick="checkAnswer('B')">B. &lt;p&gt;</button>
+        <button onclick="checkAnswer('C')">C. &lt;img&gt;</button>
+
+        <p id="answer"></p>
+    </section>
+
+</main>
+
+<script>
+function checkAnswer(choice) {
+    const answer = document.getElementById("answer");
+
+    if (choice === "B") {
+        answer.textContent = "Correct! Great job!";
+        answer.style.color = "#4ade80";
+    } else {
+        answer.textContent = "Not quite! Try again.";
+        answer.style.color = "#f87171";
+    }
+}
+</script>
+
+</body>
+</html>
+
